@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Typing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Typing Speed Test</h1>
+
+        <div class="stats">
+            <div class="timer">Time: <span id="timer">0</span>s</div>
+            <div class="wpm-display">WPM: <span id="wpm">0</span></div>
+            <div class="accuracy-display">Accuracy: <span id="accuracy">100</span>%</div>
+        </div>
+
+        <div id="quote-display" class="quote-display">
+            <!-- Quote text will appear here -->
+            Loading quote...
+        </div>
+
+        <textarea id="typing-input" class="typing-input" autofocus rows="3" placeholder="Start typing here..."></textarea>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/IGgb10A_2c8?si=QVhP0cPQY3weUpKW&amp;start=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div id="results" class="results" style="display: none;">
+            <h2>Results</h2>
+            <p>WPM: <span id="final-wpm">0</span></p>
+            <p>Accuracy: <span id="final-accuracy">0</span>%</p>
+            <p>Time: <span id="final-time">0</span>s</p>
+            <p>Errors: <span id="final-errors">0</span></p>
+        </div>
+
+        <button id="restart-btn">Restart</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

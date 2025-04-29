@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyric Typing Game</title>
+    <!-- Link to static CSS file -->
+    <link rel="stylesheet" href="{% static 'typing_game/style.css' %}">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-content">
+        {# Site Title/Logo - Link to home/random game #}
+        <a href="{% url 'typing_game:game_view_random' %}" class="site-title">typy</a>
+
+        {# Main Navigation Links #}
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{% url 'typing_game:game_view_random' %}">Play Random</a></li>
+                <li><a href="{% url 'typing_game:search_songs' %}">Search Songs</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+    <div class="game-container">
+        <h1>Lyric Typing Challenge</h1>
+
+        <div class="search-bar-container" style="margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #555;">
+            <form method="get" action="{% url 'typing_game:search_songs' %}">
+                <input type="text" name="q" placeholder="Search Title or Artist..." class="typing-input" style="width: auto; min-width: 250px; margin-bottom: 0; display: inline-block; vertical-align: middle; font-size: 1em; padding: 8px 12px;">
+                <button type="submit" id="search-btn" style="padding: 9px 20px; font-size: 1em; background-color: #64b5f6; color: #111; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease; vertical-align: middle; margin-left: 5px; font-weight: bold;">Search</button>
+                 {# Optional: Link to go directly to search page #}
+                <span style="margin-left: 15px; font-size: 0.9em; color: #bdbdbd;">
+                    or <a href="{% url 'typing_game:search_songs' %}" style="color: #64b5f6; text-decoration: none;">View All Search Results</a>
+                </span>
+            </form>
+        </div>
+
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% elif snippet %}
+            <div class="song-info">
+                <h3>{{ snippet.artist }} - "{{ snippet.song_title }}"</h3>
+            </div>
+
+            <div class="song-info">
+                {# --- Display YouTube Link if it exists --- #}
+                {% if snippet.yt_id%}
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{snippet.yt_id}}?si=eHZX83miWps5hQXt&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                {% endif %}
+                {# --- End of YouTube Link --- #}
+            </div>
+
+            <div class="stats">
+                <div class="timer">Time: <span id="timer">0</span>s</div>
+                <div class="wpm-display">WPM: <span id="wpm">0</span></div>
+                <div class="accuracy-display">Accuracy: <span id="accuracy">100</span>%</div>
+            </div>
+            <div class = "stats">
+                <input id = "lala" type="checkbox">
+                <label for="lala">remove parenthtical items</label>
+            </div>
+
+             <!-- Pass lyrics to JS via data attribute & also display -->
+            <div id="quote-display" class="quote-display" data-lyrics="{{ snippet.lyrics }}">
+                <!-- Lyrics will be populated by JS based on data-lyrics -->
+                Loading lyrics...
+            </div>
+
+            <textarea id="typing-input" class="typing-input" autofocus rows="4" placeholder="Start typing the lyrics here..."></textarea>
+
+            <div id="results" class="results" style="display: none;">
+                <h2>Results</h2>
+                <p>WPM: <span id="final-wpm">0</span></p>
+                <p>Accuracy: <span id="final-accuracy">0</span>%</p>
+                <p>Time: <span id="final-time">0</span>s</p>
+                <p>Errors: <span id="final-errors">0</span></p>
+            </div>
+
+            <button id="restart-btn">Next Snippet (Reload)</button>
+
+        {% else %}
+             <p>Something went wrong loading the snippet.</p>
+        {% endif %}
+
+
+    </div> {# End of game-container #}
+
+    <!-- Link to static JS file (defer ensures HTML is parsed first) -->
+    <script src="{% static 'typing_game/script.js' %}" defer></script>
+</body>
+</html>

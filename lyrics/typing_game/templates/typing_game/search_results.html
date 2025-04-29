@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Lyric Snippets</title>
+    {# Link the CSS file correctly #}
+    <link rel="stylesheet" href="{% static 'typing_game/style.css' %}">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-content">
+        {# Site Title/Logo - Link to home/random game #}
+        <a href="{% url 'typing_game:game_view_random' %}" class="site-title">typy</a>
+
+        {# Main Navigation Links #}
+        <nav class="main-nav">
+            <ul>
+                {# Add 'active' class dynamically based on current page if needed #}
+                <li><a href="{% url 'typing_game:game_view_random' %}">Play Random</a></li>
+                <li><a href="{% url 'typing_game:search_songs' %}">Search Songs</a></li>
+                {# Add more links here if you have other pages like About, Profile, etc. #}
+                {# Example: <li><a href="#">About</a></li> #}
+            </ul>
+        </nav>
+    </div>
+</header>
+    <div class="game-container">
+
+        <h1>Search Lyrics</h1>
+
+        <form method="get" action="{% url 'typing_game:search_songs' %}" style="margin-bottom: 20px;">
+            <input type="text" name="q" placeholder="Search Title or Artist" value="{{ query|escape }}" class="typing-input" style="width: auto; min-width: 250px; margin-bottom: 0; display: inline-block; vertical-align: middle;">
+            <button type="submit" id="search-btn" style="padding: 10px 20px; font-size: 1em; background-color: #64b5f6; color: #111; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease; vertical-align: middle; margin-left: 5px;">Search</button>
+        </form>
+
+        {# Consider removing the <hr> or styling it to fit the theme #}
+        <hr style="border: 0; border-top: 1px solid #555; margin: 20px 0;">
+
+        {# --- Results Section --- #}
+        <div class="search-results-area" style="text-align: left;"> {# Keep results left-aligned within the centered container #}
+            {% if query %}
+                <h2 style="color: #ccc; margin-bottom: 15px; font-weight: 300;">Results for "{{ query|escape }}"</h2>
+
+                {% if results %}
+                    <ul style="list-style: none; padding: 0;">
+                        {% for snippet in results %}
+                            <li style="background-color: #3a3a3a; border: 1px solid #555; padding: 15px; margin-bottom: 10px; border-radius: 8px;">
+                                "{{ snippet.lyrics|truncatewords:15 }}" -
+                                <strong style="color: #e0e0e0;">{{ snippet.song_title|escape }}</strong> by <span style="color: #bdbdbd;">{{ snippet.artist|escape }}</span>
+
+                                {# Style the link to be more visible #}
+                                (<a href="{% url 'typing_game:game_view_specific' snippet.id %}" style="color: #64b5f6; text-decoration: none; font-weight: bold;">Play this snippet</a>)
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="no-results" style="color: #bdbdbd;">No lyric snippets found matching your query.</p>
+                {% endif %}
+
+            {% else %}
+                 {# Initial message when no search has been performed #}
+                <p style="color: #bdbdbd;">Enter a song title or artist name above to search.</p>
+            {% endif %}
+        </div> {# End search-results-area #}
+
+        {# --- Link Back --- #}
+        <p style="margin-top: 25px;">
+            <a href="{% url 'typing_game:game_view_random' %}" style="color: #64b5f6; text-decoration: none; font-weight: bold;">Play a Random Snippet</a>
+        </p>
+
+    </div> {# End of game-container #}
+
+</body>
+</html>

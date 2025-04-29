@@ -1,0 +1,296 @@
+/* typing_game/static/typing_game/style.css */
+
+/* --- Global Styles & Layout --- */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Clean sans-serif font */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top for longer content */
+    min-height: 100vh;
+    background-color: #333; /* Darker background */
+    color: #e0e0e0; /* Light text color for contrast */
+    margin: 0;
+    padding-top: 5vh; /* Add some space from the top */
+}
+/* Add to the end of style.css */
+
+.song-info {
+    /* Add position relative if you want absolute positioning inside later */
+    position: relative;
+    padding-bottom: 5px; /* Add space if link appears */
+}
+
+.youtube-link {
+    margin-top: 8px; /* Space below title */
+    margin-bottom: 0; /* Reset default paragraph margin */
+    font-size: 0.9em;
+}
+
+.youtube-link a {
+    color: #ff8a80; /* A lighter red, adjust as needed */
+    text-decoration: none;
+    font-weight: 500; /* Slightly bolder */
+    transition: color 0.2s ease;
+    padding: 3px 6px; /* Add some padding */
+    border-radius: 4px; /* Slightly rounded corners */
+    background-color: rgba(255, 138, 128, 0.1); /* Very subtle background */
+}
+
+.youtube-link a:hover {
+    color: #ff5252; /* Brighter red on hover */
+    text-decoration: none; /* Keep underline off if desired */
+    background-color: rgba(255, 138, 128, 0.2);
+}
+.game-container {
+    background-color: #444; /* Slightly lighter container background */
+    padding: 30px 40px;
+    border-radius: 12px; /* Softer corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+    text-align: center;
+    max-width: 850px; /* Slightly wider */
+    width: 90%;
+    border: 1px solid #555; /* Subtle border */
+}
+
+/* --- Typography & Headings --- */
+h1 {
+    color: #64b5f6; /* A nice blue for the title */
+    margin-bottom: 25px;
+    font-weight: 300; /* Lighter font weight */
+    letter-spacing: 1px;
+}
+
+.song-info {
+    color: #bdbdbd; /* Lighter grey for song info */
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+.song-info h3 {
+    margin: 0;
+    font-weight: 400; /* Normal weight for song title/artist */
+}
+
+/* --- Stats Display --- */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 1.2em;
+    color: #ccc; /* Light grey for stats text */
+    background-color: #3a3a3a; /* Slightly different background for stats bar */
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.stats div { /* Target timer, wpm, accuracy divs */
+    min-width: 120px; /* Ensure they don't jump around too much */
+    text-align: center;
+}
+
+.stats span { /* Target the actual number spans */
+    color: #fff; /* White for the numbers */
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+
+/* --- Quote/Lyrics Display --- */
+.quote-display {
+    margin-bottom: 25px;
+    font-size: 1.6em; /* Larger font for lyrics */
+    line-height: 1.7; /* Increased line height */
+    letter-spacing: 1.5px; /* More spacing between letters */
+    text-align: left;
+    background-color: #2a2a2a; /* Dark background for quote area */
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    min-height: 100px; /* Ensure space */
+    font-family: 'Fira Code', 'Courier New', Courier, monospace; /* Modern monospace font */
+    color: #9e9e9e; /* Default color for untyped text */
+    overflow-wrap: break-word; /* Ensure long words wrap */
+    white-space: pre-wrap; /* Respect spaces and line breaks from lyrics */
+}
+
+/* Individual character styling */
+.quote-display span {
+    transition: color 0.1s ease, background-color 0.1s ease, text-decoration 0.1s ease;
+    border-radius: 2px;
+}
+
+.quote-display span.correct {
+    color: #a5d6a7; /* Softer green for correct */
+}
+
+.quote-display span.incorrect {
+    color: #ef9a9a; /* Softer red for incorrect */
+    background-color: rgba(239, 154, 154, 0.15); /* Subtle red background */
+    text-decoration: underline;
+    text-decoration-color: #ef5350; /* Stronger red underline */
+    text-decoration-thickness: 1px; /* Thinner underline */
+}
+
+.quote-display span.current {
+    /* More subtle cursor - maybe just an underline or slightly different background */
+    background-color: #555; /* Dark grey background for cursor */
+    color: #fff; /* White text for cursor */
+    padding: 0 1px;
+}
+
+
+/* --- Typing Input Area --- */
+.typing-input {
+    width: calc(100% - 30px); /* Adjust width considering padding */
+    padding: 12px 15px;
+    font-size: 1.3em; /* Slightly smaller than quote for comfort */
+    border: 2px solid #666; /* Darker border */
+    border-radius: 8px;
+    margin-bottom: 25px;
+    resize: none; /* Prevent resizing */
+    font-family: 'Fira Code', 'Courier New', Courier, monospace; /* Match quote font */
+    letter-spacing: 1px; /* Slightly less than quote */
+    background-color: #383838; /* Input background */
+    color: #e0e0e0; /* Light text color */
+}
+
+.typing-input:focus {
+    outline: none;
+    border-color: #64b5f6; /* Blue focus border */
+    box-shadow: 0 0 8px rgba(100, 181, 246, 0.3); /* Subtle blue glow */
+}
+
+/* --- Results Section --- */
+.results {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #4caf5030; /* Transparent green background */
+    border: 1px solid #81c784; /* Green border */
+    border-radius: 8px;
+    color: #a5d6a7; /* Light green text */
+}
+
+.results h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #e8f5e9; /* Very light green/white for heading */
+    font-weight: 400;
+}
+
+.results p {
+    margin: 8px 0;
+    font-size: 1.15em;
+}
+
+.results span { /* Target result value spans */
+    font-weight: bold;
+    color: #fff; /* White for result values */
+    margin-left: 5px;
+}
+
+/* --- Button Styling --- */
+button#restart-btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    background-color: #64b5f6; /* Match H1 color */
+    color: #111; /* Dark text on button */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-weight: bold;
+    margin-top: 10px; /* Add space above button if results are shown */
+}
+
+button#restart-btn:hover {
+    background-color: #42a5f5; /* Slightly darker blue on hover */
+}
+
+button#restart-btn:active {
+    transform: scale(0.98); /* Slight shrink effect on click */
+}
+
+/* --- Error Message Styling --- */
+.error-message {
+    color: #ef9a9a; /* Match incorrect color */
+    background-color: rgba(239, 154, 154, 0.15); /* Match incorrect background */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ef5350; /* Match incorrect underline */
+    margin: 20px 0;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+/* ==========================
+   Header Navigation Styles
+   ========================== */
+
+   .site-header {
+    background-color: #444; /* Slightly lighter than body, matches game container */
+    padding: 10px 0;       /* Vertical padding */
+    border-bottom: 1px solid #555; /* Subtle separator line */
+    width: 100%;           /* Make header span full width */
+
+    /* Optional: Make header stick to the top */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it stays on top of other content */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+
+/* Container to manage content width and alignment within the header */
+.header-content {
+    max-width: 1100px; /* Adjust max-width as needed, can be wider than game-container */
+    margin: 0 auto;    /* Center the content horizontally */
+    padding: 0 20px;   /* Padding on the sides */
+    display: flex;
+    justify-content: space-between; /* Pushes title left, nav right */
+    align-items: center;        /* Vertically align items in the middle */
+}
+
+/* Styling for the Site Title/Logo */
+.site-title {
+    color: #64b5f6;    /* Use the theme's accent blue */
+    font-size: 1.7em;  /* Adjust size */
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px; /* Optional nice touch */
+    transition: color 0.2s ease;
+}
+
+.site-title:hover {
+    color: #90caf9; /* Lighter blue on hover */
+}
+
+/* Styling for the Navigation List */
+.main-nav ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    display: flex;   /* Align nav items in a row */
+}
+
+.main-nav li {
+    margin-left: 30px; /* Spacing between navigation items */
+}
+
+/* Styling for Navigation Links */
+.main-nav a {
+    color: #e0e0e0;       /* Use the theme's light text color */
+    text-decoration: none;
+    font-size: 1.1em;
+    padding-bottom: 5px; /* Space for the bottom border hover effect */
+    border-bottom: 2px solid transparent; /* Transparent border initially */
+    transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+/* Hover and Active states for Navigation Links */
+.main-nav a:hover,
+.main-nav a.active { /* Add class="active" to the current page's link in the template */
+    color: #64b5f6; /* Use accent blue on hover/active */
+    border-bottom-color: #64b5f6; /* Show blue underline */
+}
