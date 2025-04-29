@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-7ecrpv%gqxqh17$)vf1swd(q+cr$r1r4g0qc=3&vtrpki0g8z1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["typing-game-mh4i.onrender.com"]
 
 
 # Application definition
